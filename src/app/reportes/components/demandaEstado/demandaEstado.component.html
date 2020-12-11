@@ -1,0 +1,114 @@
+<div>
+
+    <div>
+      <div class="col-xl-12">
+        <br>
+        <h2>Demanda</h2>
+        <h5 *ngIf="mostrarTotal">Total de gestiones : {{totalGes}} </h5>
+
+        <div>
+      
+        </div>
+        <mat-card class="example-card">
+
+          <mat-card-header>
+            <mat-card-title>Demanda estados </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+              <div class="container">
+                <div class="row ">
+               
+                  
+                  <div class="col-4">
+                    <button mat-flat-button color="primary"   (click)="showAll()">Visualizar Todos</button>
+
+                  </div>
+               
+                  <div class="col-4">
+                    <button mat-flat-button color="primary"   (click)="generateReport()">Generar Reporte</button>
+
+                  </div>
+
+                </div>
+              </div>
+          </mat-card-content>
+  
+        </mat-card>
+        <br>
+  
+        <mat-card class="example-card">
+         <!--- <button *ngIf="showExport" mat-raised-button color="primary" (click)="export()">Exportar a Excel</button>
+              -->
+          <div class="container">
+            <div class="row">
+           
+            <br>
+            </div>
+          </div>
+          <div class="example-container mat-elevation-z8">
+            <table mat-table #table [dataSource]="dataSource">
+
+              <ng-container matColumnDef="FECPAGARE">
+             
+                <th mat-header-cell *matHeaderCellDef>FECPAGARE</th>
+                <td mat-cell *matCellDef="let element"> {{element.FECPAGARE}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="VENCIPAGARE">
+                <th mat-header-cell *matHeaderCellDef> VENCIPAGARE </th>
+                <td mat-cell *matCellDef="let element"> {{element.VENCIPAGARE}} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="CUOTAS">
+                <th mat-header-cell *matHeaderCellDef> CUOTAS </th>
+                <td mat-cell *matCellDef="let element"> {{element.CUOTAS}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="AGENCIA">
+                <th mat-header-cell *matHeaderCellDef>AGENCIA </th>
+                <td mat-cell *matCellDef="let element"> {{element.AGENCIA}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="IDCREDITO">
+                <th mat-header-cell *matHeaderCellDef> IDCREDITO </th>
+                <td mat-cell *matCellDef="let element"> {{element.IDCREDITO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="GRANTOT">
+                <th mat-header-cell *matHeaderCellDef> GRANTOT </th>
+                <td mat-cell *matCellDef="let element"> {{element.GRANTOT}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="NOMBRE">
+                <th mat-header-cell *matHeaderCellDef> NOMBRE</th>
+                <td mat-cell *matCellDef="let element"> {{element.NOMBRE}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="TIPDOC">
+                <th mat-header-cell *matHeaderCellDef> TIPDOC</th>
+                <td mat-cell *matCellDef="let element"> {{element.TIPDOC}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="DPI">
+                <th mat-header-cell *matHeaderCellDef> DPI</th>
+                <td mat-cell *matCellDef="let element"> {{element.DPI}} </td>
+              </ng-container>
+      
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+              <tr mat-row [ngClass]="{'make-gold': row.SHOW }" *matRowDef="let row; columns: displayedColumns;"
+                class="example-element-row"></tr>
+            </table>
+  
+  
+          </div>
+          <div>
+            <mat-paginator 
+            [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = getServerData($event)" showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

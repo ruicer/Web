@@ -1,0 +1,153 @@
+<div>
+
+  <div>
+    <div class="col-xl-12">
+      <br>
+      <h2>Call Center</h2>
+      <div>
+      </div>
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>Gestiones</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form [formGroup]="callCenterForm">
+            <div class="container">
+              <div class="row ">
+                <div class="col-3">
+                  <mat-form-field class="col-8">
+                    <mat-label>SUCURSALES</mat-label>
+                    <mat-select formControlName="sucursal">
+                      <mat-option *ngFor="let food of sucursales" [value]="food.CODIGO">
+                        {{food.SUCURSAL}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-3">
+                  <mat-form-field class="col-8">
+                    <mat-label>MORA MAYOR A </mat-label>
+                    <mat-select formControlName="mora">
+                      <mat-option *ngFor="let food of moras" [value]="food.ESTADO">
+                        {{food.ESTADO}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-4">
+                  <p class="p-text">CARGAR CARTERA EN EXCEL</p>
+                 <fileexcel-app (throttle)="onThrottle($event)"></fileexcel-app> 
+                </div>
+                <div class="col-2">
+                  <p class="p-text">DESCARGAR </p>
+                  <button mat-stroked-button color="primary" (click)="downloadFile()">PLANTILLA</button>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-card-content>
+
+      </mat-card>
+      <br>
+
+      <mat-card class="example-card">
+        <div class="container">
+          <div class="row">
+           
+            
+          
+          </div>
+        </div>
+        <div class="example-container mat-elevation-z8">
+          <div>
+            <mat-form-field class="col-2">
+              <input matInput (keyup)="applyFilter($event.target.value)" (focus)="setupFilter('PRESTAMO')" matInput placeholder="No. Prestamo">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <input matInput (keyup)="applyFilter($event.target.value)" (focus)="setupFilter('NOMBRE_DEL_CLIENTE')" matInput placeholder="Cliente">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <input matInput (keyup)="applyFilter($event.target.value)" (focus)="setupFilter('DIASMORACAPITAL')" matInput placeholder="Dias de mora capital">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <input matInput (keyup)="applyFilter($event.target.value)" (focus)="setupFilter('DIASMORAINTERES')" matInput placeholder="Dias mora interes">
+            </mat-form-field>
+            <mat-form-field class="col-2">
+              <input matInput (keyup)="applyFilter($event.target.value)" (focus)="setupFilter('COD_PROMOTOR')" matInput placeholder="Promotor">
+            </mat-form-field>
+          </div>
+          <table mat-table [dataSource]="dataSource">
+
+            <ng-container matColumnDef="icons">
+              <th mat-header-cell *matHeaderCellDef>
+                Opciones </th>
+              <td mat-cell *matCellDef="let element">
+                <button matTooltip="Gestion de llamada" matTooltipClass="example-tooltip-blue" mat-icon-button
+                  color="primary" (click)="openDialog(element)">
+                  <mat-icon>create_new_folder</mat-icon>
+                </button> </td>
+            </ng-container>
+
+            <ng-container matColumnDef="PRESTAMO">
+           
+              <th mat-header-cell *matHeaderCellDef> No. Prestamo </th>
+              <td mat-cell *matCellDef="let element"> {{element.PRESTAMO}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="CODSUC">
+              <th mat-header-cell *matHeaderCellDef> Codigo SUC </th>
+              <td mat-cell *matCellDef="let element"> {{element.CODSUC}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="NOMBRE_DEL_CLIENTE">
+              <th mat-header-cell *matHeaderCellDef> Cliente </th>
+              <td mat-cell *matCellDef="let element"> {{element.NOMBRE_DEL_CLIENTE}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="DIASMORACAPITAL">
+              <th mat-header-cell *matHeaderCellDef> Dias de mora Capital </th>
+              <td mat-cell *matCellDef="let element"> {{element.DIASMORACAPITAL}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="DIASMORAINTERES">
+              <th mat-header-cell *matHeaderCellDef> Dias mora interes </th>
+              <td mat-cell *matCellDef="let element"> {{element.DIASMORAINTERES}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="SUCURSAL">
+              <th mat-header-cell *matHeaderCellDef> Sucursal </th>
+              <td mat-cell *matCellDef="let element"> {{element.SUCURSAL}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="NOMBRE_PROMOTOR">
+              <th mat-header-cell *matHeaderCellDef> Nombre Promotor </th>
+              <td mat-cell *matCellDef="let element"> {{element.NOMBRE_PROMOTOR}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="COD_PROMOTOR">
+              <th mat-header-cell *matHeaderCellDef> Codigo Promotor </th>
+              <td mat-cell *matCellDef="let element"> {{element.COD_PROMOTOR}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="PRIORIDAD">
+              <th mat-header-cell *matHeaderCellDef> PRIORIDAD</th>
+              <td mat-cell *matCellDef="let element"> {{element.PRIORIDAD}} </td>
+            </ng-container>
+            <ng-container matColumnDef="NOMBREGRUPO">
+              <th mat-header-cell *matHeaderCellDef> Nombre de grupo</th>
+              <td mat-cell *matCellDef="let element"> {{element.NOMBREGRUPO}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+            <tr mat-row [ngClass]="{'make-gold': row.SHOW }" *matRowDef="let row; columns: displayedColumns;"
+              class="example-element-row"></tr>
+          </table>
+          <div>
+            <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </div>
+     
+      </mat-card>
+    </div>
+  </div>
+</div>

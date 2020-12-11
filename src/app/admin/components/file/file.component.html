@@ -1,0 +1,18 @@
+<div class="mainContainer">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <button mat-stroked-button class="input-group-text upload" (click)="upload()" id="btnUpload">Subir Carta</button>
+
+        </div>
+        <div class="custom-file">
+            <form action="/api/upload" method="post" enctype="multipart/form-data">
+                <input (change)="fileChange($event)" type="file" class="custom-file-input" id="inputGroupFile01"
+                    aria-describedby="inputGroupFileAddon01">
+            </form>
+            <label class="custom-file-label" for="inputGroupFile01">{{FILENAME}}</label>
+        </div>
+    </div>
+    <p *ngIf="load">
+        CARGANDO!...
+    </p>
+</div>

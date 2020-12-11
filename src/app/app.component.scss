@@ -1,0 +1,54 @@
+.example-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+  }
+
+  .example-sidenav {
+    width: 23%
+  }
+  
+  .img-app {
+    width: 5%;
+    height: 2%;
+    padding-inline-end: 10px
+  }
+
+  .img-side {
+    width:  100%;
+    height: 90%
+  }
+
+  .contain-menu {
+    padding-top: 45%
+  }
+
+  .buttons {
+    width: 100%;
+  }
+
+  .divs {
+    padding-block-end: 0.5em
+  }
+
+
+
+  .menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .submenu {
+    overflow-y: hidden;
+    transition: transform 300ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  .submenu.expanded {
+    transform: scaleY(1);
+  }

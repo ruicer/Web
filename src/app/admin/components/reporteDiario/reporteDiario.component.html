@@ -1,0 +1,133 @@
+<div>
+
+    <div>
+      <div class="col-xl-12">
+        <br>
+        <h2>Call Center</h2>
+        <h5 *ngIf="mostrarTotal">Total de gestiones : {{totalGes}} </h5>
+
+        <div>
+      
+        </div>
+        <mat-card class="example-card">
+
+          <mat-card-header>
+            <mat-card-title>Reporte Gestiones</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="callCenterForm">
+              <div class="container">
+                <div class="row ">
+                  <div class="col-4">
+                    <mat-form-field class="col-8">
+                      <mat-label>SUCURSALES</mat-label>
+                      <mat-select formControlName="sucursal">
+                        <mat-option *ngFor="let food of sucursales" [value]="food.CODIGO">
+                          {{food.SUCURSAL}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input matInput  formControlName="fechIn" [matDatepicker]="picker" placeholder="FECHA INICIAL">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input matInput  formControlName="fechFn" [matDatepicker]="picker1" placeholder="FECHA FINAL">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                 
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+  
+        </mat-card>
+        <br>
+  
+        <mat-card class="example-card">
+          <button *ngIf="showExport" mat-raised-button color="primary" (click)="exportAsExcel()">Exportar a Excel</button>
+              
+          <div class="container">
+            <div class="row">
+           
+            <br>
+            </div>
+          </div>
+          <div class="example-container mat-elevation-z8">
+            <table mat-table #table [dataSource]="dataSource">
+
+              <ng-container matColumnDef="SUCURSAL">
+             
+                <th mat-header-cell *matHeaderCellDef>SUCURSAL </th>
+                <td mat-cell *matCellDef="let element"> {{element.SUCURSAL}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="USUARIO">
+                <th mat-header-cell *matHeaderCellDef> USUARIO </th>
+                <td mat-cell *matCellDef="let element"> {{element.USUARIO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="NOMBRE">
+                <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                <td mat-cell *matCellDef="let element"> {{element.NOMBRE}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="PRESTAMO">
+                <th mat-header-cell *matHeaderCellDef> PRESTAMO </th>
+                <td mat-cell *matCellDef="let element"> {{element.PRESTAMO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="DESC">
+                <th mat-header-cell *matHeaderCellDef>DESCRIPCION </th>
+                <td mat-cell *matCellDef="let element"> {{element.DESC}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="G_I">
+                <th mat-header-cell *matHeaderCellDef> G_I </th>
+                <td mat-cell *matCellDef="let element"> {{element.G_I}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="TIPGEST">
+                <th mat-header-cell *matHeaderCellDef> TIPGEST </th>
+                <td mat-cell *matCellDef="let element"> {{element.TIPGEST}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="GESTION">
+                <th mat-header-cell *matHeaderCellDef> GESTION </th>
+                <td mat-cell *matCellDef="let element"> {{element.GESTION}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="OBS">
+                <th mat-header-cell *matHeaderCellDef> OBS</th>
+                <td mat-cell *matCellDef="let element"> {{element.OBS}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="DURLLAMADA">
+                <th mat-header-cell *matHeaderCellDef> DURACION</th>
+                <td mat-cell *matCellDef="let element"> {{element.DURLLAMADA}} </td>
+              </ng-container>
+              <ng-container matColumnDef="HORA">
+                <th mat-header-cell *matHeaderCellDef> HORA</th>
+                <td mat-cell *matCellDef="let element"> {{element.HORA}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+              <tr mat-row [ngClass]="{'make-gold': row.SHOW }" *matRowDef="let row; columns: displayedColumns;"
+                class="example-element-row"></tr>
+            </table>
+  
+  
+          </div>
+          <div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

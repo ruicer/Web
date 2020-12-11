@@ -1,0 +1,95 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav class="example-sidenav" (mouseenter)="mouseenter()" (mouseleave)="mouseleave()">
+  <mat-nav-list>
+    <mat-list-item (click)="showSubmenu = !showSubmenu" class="parent">
+        <span class="full-width" *ngIf="isExpanded || isShowing">Inicio </span>
+        <mat-icon mat-list-icon>home</mat-icon>
+        <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubmenu}" *ngIf="isExpanded || isShowing">expand_more
+        </mat-icon>
+      </mat-list-item>
+
+      <app-menu  [menus]="listOptions"></app-menu>
+
+      <div class="submenu" [ngClass]="{'expanded' : showSubmenu}" *ngIf="isShowing || isExpanded">
+        <mat-list-item (click)="showSubSubMenu = !showSubSubMenu" class="parent">
+          <span class="full-width" *ngIf="isExpanded || isShowing">
+            <mat-icon>minimize
+            </mat-icon> Manejadores y Reportes
+          </span>
+          <mat-icon class="menu-button" [ngClass]="{'rotated' : showSubSubMenu}" *ngIf="isExpanded || isShowing">
+            expand_more</mat-icon>
+        </mat-list-item>
+        <div class="submenu" [ngClass]="{'expanded' : showSubSubMenu}" *ngIf="isShowing || isExpanded">
+
+
+          <app-menu  [menus]="listSubOptions"></app-menu>
+
+
+        </div>
+
+      </div>
+
+    </mat-nav-list>
+    <mat-nav-list>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <div class="example-sidenav-content">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+         <button mat-icon-button *ngIf="access " (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div class="container">
+          <div class="row align-items-start">
+            <div class="col">
+              <img class="img-app" src="assets/icons/instructor.jpg">
+              <span>Cobranza </span>
+            </div>
+          </div>
+        </div>
+        <div class="div_usuario" *ngIf="access ">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>account_circle</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [routerLink]="'/admin/inicio'">
+              <mat-icon>folder_open</mat-icon>
+              <span>Inicio</span>
+            </button>
+            <button mat-menu-item [routerLink]="'/admin/reporteDiario'">
+              <mat-icon>report</mat-icon>
+              <span>Reporte Gestiones</span>
+            </button>
+            <button mat-menu-item [routerLink]="'/admin/changeExtension'">
+              <mat-icon>account_box</mat-icon>
+              <span>Cambio de extensión</span>
+            </button>
+            <button mat-menu-item [routerLink]="'/admin/cartera'">
+              <mat-icon>cloud_upload</mat-icon>
+              <span>Cargar cartera</span>
+            </button>
+            <button mat-menu-item (click)="goToLink()">
+              <mat-icon>assignment</mat-icon>
+              <span>Carta Cobro</span>
+            </button>
+            <button mat-menu-item (click)="goToLinkConst()">
+              <mat-icon>description</mat-icon>
+              <span>Consolidado cobranza</span>
+            </button>
+            <button mat-menu-item (click)="logout()">
+              <mat-icon>reply</mat-icon>
+              <span>salir</span>
+            </button>
+
+          </mat-menu>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div>
+    </div>
+    <spinner-app *ngIf="activeSpinner"></spinner-app>
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>

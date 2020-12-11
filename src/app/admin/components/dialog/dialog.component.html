@@ -1,0 +1,516 @@
+<div class="overlay">
+  <mat-card-subtitle>
+      <div class="example-small-box2 mat-elevation-z4">
+          <button mat-icon-button matTooltip="Agregar Gestion"  [mat-dialog-close]="message"  matTooltipClass="example-tooltip-blue" color="primary" (click)="addGestion()" aria-label="Example icon-button with a heart icon">
+              <mat-icon>save</mat-icon>
+            </button>
+            <button mat-icon-button matTooltip="Salir"  matTooltipClass="example-tooltip-red"  color="warn" (click)="close()" aria-label="Example icon-button with a heart icon">
+              <mat-icon>highlight_off</mat-icon>
+            </button>
+            
+          
+      </div>
+      <h5 *ngIf="viewReloj">
+          {{hours}} : {{minutes}} : {{seconds}}
+        </h5>
+        <h5 *ngIf="warn">
+          DEBE REALIZAR LLAMADA PARA GUARDAR GESTION
+        </h5>
+        <h5 *ngIf="warnObs">
+          DEBE AGREGAR OBSERVACION
+        </h5>
+      
+      
+  </mat-card-subtitle>
+  <mat-dialog-content class="mat-typography">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">phone</mat-icon>
+                Numero Telefonico
+              </ng-template>
+              <div *ngIf="numVisible">
+                
+                <table mat-table [dataSource]="dataSource">
+                 
+                  <ng-container matColumnDef="LLAMADA">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Llamada </th>
+                    <td mat-cell *matCellDef="let row">
+                     
+                      <button matTooltip="Llamar"  matTooltipClass="example-tooltip-blue" 
+                      mat-icon-button color="primary" [disabled]="isCall" (click)="call(row)">
+                        <mat-icon>phone</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="TIPO">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                    <td mat-cell *matCellDef="let row"> {{row.TIPO}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="NOMBRE">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                    <td mat-cell *matCellDef="let row"> {{row.NOMBRE}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="TELPRINCIPAL">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> telefono </th>
+                    <td mat-cell *matCellDef="let row"> {{row.TELPRINCIPAL}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="EDIT">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+                    <td mat-cell *matCellDef="let row">
+                    
+                      <button matTooltip="Editar Numero"  matTooltipClass="example-tooltip-blue" 
+                        mat-icon-button color="primary" (click)="editarNum(row)">
+                        <mat-icon>create</mat-icon>
+                      </button>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+                  </tr>
+                </table>
+
+                <mat-paginator #onePaginator [pageSizeOptions]="[5]"></mat-paginator>
+              </div>
+
+              <div *ngIf="addNum">  
+               
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <form [formGroup]="formAddNum">
+                        <h3 *ngIf="!rowAdd">Editar telefono</h3>
+                        <h3 *ngIf="rowAdd">Agregar telefono</h3>
+                        <button  class="col-3" matTooltip="Llamar"  matTooltipClass="example-tooltip-blue" mat-raised-button color="primary" (click)="regresar()">
+                          Regresar
+                        </button>
+                        <button  class="col-4"  matTooltip="Llamar"  matTooltipClass="example-tooltip-blue" mat-raised-button color="primary" (click)="addNumMe()">
+                          Agregar nuevo numero
+                        </button>
+                        <div class="col-8"></div>
+                        <br>
+
+                          <mat-form-field class="col-3">
+                            <input matInput type="text" formControlName="numero" placeholder="Numero">
+                          </mat-form-field>
+                          
+                          <mat-form-field *ngIf="rowAdd" class="col-3">
+                            <input matInput type="text" formControlName="rel" placeholder="Relación">
+                          </mat-form-field>
+                          <button  class="col-3"  [disabled]="!formAddNum.valid" (click)="addNumTelefono()" mat-raised-button color="primary">Guardar</button>
+                    
+                    
+                    
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">contacts</mat-icon>
+                Datos de Cliente
+              </ng-template>
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <form [formGroup]="formDatosCliente">
+                      <div>
+                        <h3>Datos del credito</h3>
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="credito" placeholder="Credito">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-8">
+                          <input matInput formControlName="nombre" disabled placeholder="Nombre">
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="col-2">
+                          <input matInput formControlName="capital" placeholder="Capital">
+                        </mat-form-field>
+                        <mat-form-field class="col-2">
+                          <input matInput formControlName="interes" placeholder="Interes">
+                        </mat-form-field>
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="entrega" placeholder="Fecha Entrega">
+                        </mat-form-field>
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="vencimiento" placeholder="Fecha Vencimiento">
+                        </mat-form-field>
+                        <mat-form-field class="col-2">
+                          <input matInput formControlName="otorgado" placeholder="Capital otorgado">
+                        </mat-form-field>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">supervised_user_circle
+                </mat-icon>
+                Fiadores
+              </ng-template>
+              <div>
+                <div class="table-content mat-elevation-z8">
+                  <table mat-table [dataSource]="dataSourceFiadores">
+
+                    <ng-container matColumnDef="CREDITO">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Llamada </th>
+                      <td mat-cell *matCellDef="let row"> {{row.CREDITO}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="CODIGO">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Tipo </th>
+                      <td mat-cell *matCellDef="let row"> {{row.CODIGO}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="NOM_FIADOR">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </th>
+                      <td mat-cell *matCellDef="let row"> {{row.NOM_FIADOR}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TELEFONO">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> telefono </th>
+                      <td mat-cell *matCellDef="let row"> {{row.TELEFONO}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TELTRABAJO">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> telefono </th>
+                      <td mat-cell *matCellDef="let row"> {{row.TELTRABAJO}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TELNEGOCIO">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> telefono </th>
+                      <td mat-cell *matCellDef="let row"> {{row.TELNEGOCIO}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsFiadores;  sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsFiadores;">
+                    </tr>
+                  </table>
+
+                  <mat-paginator #twoPaginator [pageSizeOptions]="[5]"></mat-paginator>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <div class="col">
+          <mat-tab-group>
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">folder</mat-icon>
+                Saldo de cobro
+              </ng-template>
+              <div class="container">
+                <div class="row">
+                  <form [formGroup]="formSaldoCobro">
+
+                    <div class="col-sm-12">
+                      <h5>Capital</h5>
+
+                      <div class="col">
+
+                        <mat-form-field class="col-3">
+                          <input matInput  formControlName="adelantado" disabled placeholder="Adelantado">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="atrasado" disabled placeholder="Atrasado">
+                        </mat-form-field>
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="sigPagoCap" disabled placeholder="Sig. pago Capital">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="total1" disabled placeholder="TOTAL">
+                        </mat-form-field>
+
+                      </div>
+                      <h5>Interes</h5>
+
+                      <div class="col">
+
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="capitalizado" disabled placeholder="Capitalizado">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="porCobrar" disabled placeholder="Por Cobrar">
+                        </mat-form-field>
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="proyectado" disabled placeholder="Proyectado">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-3">
+                          <input matInput formControlName="total2" disabled placeholder="TOTAL">
+                        </mat-form-field>
+
+                      </div>
+
+                      <h5>Recargo</h5>
+
+                      <div class="col">
+
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="moraPeriodo" disabled placeholder="Mora Periodo">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="moraAcumulada" disabled placeholder="Mora Acumulada">
+                        </mat-form-field>
+
+
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="total3" disabled placeholder="TOTAL">
+                        </mat-form-field>
+
+                      </div>
+
+                      <h5>Cobros adicionales</h5>
+
+                      <div class="col">
+
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="cobroproyectado" disabled placeholder="Adelantado">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="cobrosJudiciales" disabled placeholder="Atrasado">
+                        </mat-form-field>
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="total4" disabled placeholder="Total">
+                        </mat-form-field>
+
+
+                      </div>
+                      <div class="col">
+                        <h5>TOTALES</h5>
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="total5" disabled placeholder="Saldo Aldia">
+                        </mat-form-field>
+
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="total6" disabled placeholder="Gran Total">
+                        </mat-form-field>
+                        <mat-form-field class="col-4">
+                          <input matInput formControlName="total7" disabled placeholder="Total">
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </mat-tab>
+
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">chrome_reader_mode</mat-icon>
+                Plan en marcha
+              </ng-template>
+              <div>
+                <div>
+                  <table mat-table [dataSource]="dataSourcePlan">
+
+                    <ng-container matColumnDef="ESTATUS">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estatus </th>
+                      <td mat-cell *matCellDef="let row"> {{row.ESTATUS}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="FECHA">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                      <td mat-cell *matCellDef="let row"> {{row.FECHA}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="CAPITAL">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Capital </th>
+                      <td mat-cell *matCellDef="let row"> {{row.CAPITAL}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="MORA">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Mora </th>
+                      <td mat-cell *matCellDef="let row"> {{row.MORA}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="TOTAL">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                      <td mat-cell *matCellDef="let row"> {{row.TOTAL}} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsPlan;  sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsPlan;">
+                    </tr>
+                  </table>
+
+                  <mat-paginator #treepaginador [pageSizeOptions]="[5]"></mat-paginator>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </div>
+        <br>
+        <div class="col-12">
+          <br>
+          <br>
+          <mat-card>
+            <mat-card-title>Gestiones</mat-card-title>
+            <mat-form-field class="col-4">
+              <mat-label>TIPO</mat-label>
+              <mat-select (selectionChange)="changeSelect($event)">
+                <mat-option *ngFor="let food of gestiones" [value]="food.ID">
+                  {{food.TIPOGESTION}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        
+            <mat-form-field class="col-4">
+              <mat-label>GESTION</mat-label>
+              <mat-select (selectionChange)="changeSelectNom($event)">
+                <mat-option  *ngFor="let nom of nomenglaturas"
+                  [value]="nom.ID_GESTION">
+                  {{nom.GESTION}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+         
+            <form [formGroup]="formAddGestion" >
+                <mat-tab-group #tab class="col-12" [color]="primary" [backgroundColor]="primary">
+                    <mat-tab [(disabled)]="observaciones" label="OBSERVACIONES">
+                      <div class="example-small-box mat-elevation-z4">
+                        <div class="container">
+                        <div class="row">
+                          <div *ngIf="volverLlamar">
+                              <mat-form-field class="col-6">
+                                  <input matInput [matDatepicker]="picker"  formControlName="fechaVolver" [matDatepicker]="df" placeholder="Fecha">
+                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                  <mat-datepicker  #picker></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="col-6">
+                                    <input matInput formControlName="horaLlamada" type="time" placeholder="hora">
+                                  </mat-form-field>
+                          </div>
+                            <mat-form-field class="col-12">
+                                <textarea matInput formControlName="observaciones" placeholder="OBSERVACIONES"></textarea>
+                              </mat-form-field>
+                        </div>
+                        </div>
+                       
+                      </div>
+      
+                    </mat-tab>
+                    <mat-tab [(disabled)]="convenio" label="CONVENIO DE PAGO ">
+                      <div class="example-small-box mat-elevation-z4">
+                        <div class="container">
+                          <div class="row">
+                            <mat-form-field class="col-4">
+                              <input matInput type="number" formControlName="montoPromesa" placeholder="Monto Promesa">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker1" formControlName="fecha" placeholder="Fecha">
+                                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                                <mat-datepicker #picker1></mat-datepicker>
+                              </mat-form-field>
+                            <mat-form-field class="col-12">
+                              <textarea matInput formControlName="observacionesConvenio" placeholder="OBSERVACIONES"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab  [(disabled)]="boleta" label="BOLETA EN CIRCULACION">
+                      <div class="example-small-box mat-elevation-z4">
+                          <div class="container">
+                              <div class="row">
+                                  <mat-form-field class="col-4">
+                                      <input matInput type="number" formControlName="noBoleta" placeholder="No. boleta">
+                                    </mat-form-field>
+                                <mat-form-field class="col-4">
+                                  <input matInput type="number" formControlName="montoBoleta" placeholder="Monto Boleta">
+                                </mat-form-field>
+                                <mat-form-field class="col-4">
+                                  <input matInput [matDatepicker]="fechaBol" formControlName="fechaBoleta"  placeholder="Fecha Boleta">
+                                  <mat-datepicker-toggle matSuffix [for]="fechaBol"></mat-datepicker-toggle>
+                                  <mat-datepicker  #fechaBol></mat-datepicker>
+                                </mat-form-field>
+                                <mat-form-field class="col-12">
+                                  <textarea matInput  formControlName="observacionesBoleta" placeholder="OBSERVACIONES"></textarea>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                      </div>
+                    </mat-tab>
+                    <mat-tab  [(disabled)]="cartas" label="ADJUNTAR CARTAS FIRMADAS">
+                      <div class="example-small-box mat-elevation-z4">
+                         <div class="col-4">
+                            <file-app (throttle)="onThrottle($event)"></file-app>
+                         </div>
+                         <br>
+                        <div class="container">
+                              <div class="row">
+                                  
+
+                                <mat-form-field class="col-12">
+                                  <textarea formControlName="observacionesCartas" matInput placeholder="OBSERVACIONES"></textarea>
+                                </mat-form-field>
+                              </div>
+                            </div>
+                      </div>
+                    </mat-tab>
+      
+                  </mat-tab-group>  
+            </form>
+
+          </mat-card>
+          <br>
+              <div class="example-container mat-elevation-z8">
+                  <table mat-table [dataSource]="dataGestionesRealizadas">
+    
+                    <ng-container matColumnDef="CREDITO">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. credito </th>
+                      <td mat-cell *matCellDef="let row"> {{row.CREDITO}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="FECLLAMADA">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Llamada </th>
+                      <td mat-cell *matCellDef="let row"> {{row.FECLLAMADA}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="GESTION">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header> Gestion </th>
+                      <td mat-cell *matCellDef="let row"> {{row.GESTION}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="MONTO">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Monton </th>
+                        <td mat-cell *matCellDef="let row"> {{row.MONTO}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="FECPAGO">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de pago </th>
+                        <td mat-cell *matCellDef="let row"> {{row.FECPAGO}} </td>
+                      </ng-container>
+                      <ng-container matColumnDef="OBS">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Observacion </th>
+                        <td mat-cell *matCellDef="let row"> {{row.OBS}} </td>
+                      </ng-container>
+    
+                      <ng-container matColumnDef="DURLLAMADA">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Duracion de llamada </th>
+                          <td mat-cell *matCellDef="let row"> {{row.DURLLAMADA}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="US">
+                          <th mat-header-cell *matHeaderCellDef mat-sort-header> Agente </th>
+                          <td mat-cell *matCellDef="let row"> {{row.US}} </td>
+                        </ng-container>
+      
+    
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsGes;  sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsGes;">
+                    </tr>
+                  </table>
+    
+                  <mat-paginator #fourpaginador [pageSizeOptions]="[5]"></mat-paginator>
+                </div>
+
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+</div>

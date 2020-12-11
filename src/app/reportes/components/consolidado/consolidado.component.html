@@ -1,0 +1,115 @@
+<div>
+
+    <div>
+      <div class="col-xl-12">
+        <br>
+        <h2>Call Center</h2>
+        <h5 *ngIf="mostrarTotal">Total de gestiones : {{totalGes}} </h5>
+
+        <div>
+      
+        </div>
+        <mat-card class="example-card">
+
+          <mat-card-header>
+            <mat-card-title>Reporte consolidado </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="callCenterForm">
+              <div class="container">
+                <div class="row ">
+               
+                  
+                  <div class="col-4">
+                    <button mat-flat-button color="primary"  *ngIf="!showExport"  (click)="generateReport()">Cargar Reporte</button>
+
+                  </div>
+               
+
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+  
+        </mat-card>
+        <br>
+  
+        <mat-card class="example-card">
+          <button *ngIf="showExport" mat-raised-button color="primary" (click)="export()">Exportar a Excel</button>
+              
+          <div class="container">
+            <div class="row">
+           
+            <br>
+            </div>
+          </div>
+          <div class="example-container mat-elevation-z8">
+            <table mat-table #table [dataSource]="dataSource">
+
+              <ng-container matColumnDef="COD_CLIENTE">
+             
+                <th mat-header-cell *matHeaderCellDef>COD</th>
+                <td mat-cell *matCellDef="let element"> {{element.ID_CREDITO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="NOMBRE">
+                <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                <td mat-cell *matCellDef="let element"> {{element.NOMBRE}} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="CREDITO">
+                <th mat-header-cell *matHeaderCellDef> CREDITO </th>
+                <td mat-cell *matCellDef="let element"> {{element.CREDITO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="IDENTIFICACION">
+                <th mat-header-cell *matHeaderCellDef>IDENTIFICACION </th>
+                <td mat-cell *matCellDef="let element"> {{element.IDENTIFICACION}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="DEPARTAMENTO">
+                <th mat-header-cell *matHeaderCellDef> DEPARTAMENTO </th>
+                <td mat-cell *matCellDef="let element"> {{element.DEPARTAMENTO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="MUNICIPIO">
+                <th mat-header-cell *matHeaderCellDef> MUNICIPIO </th>
+                <td mat-cell *matCellDef="let element"> {{element.MUNICIPIO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="TOTALSALDO">
+                <th mat-header-cell *matHeaderCellDef> TOTAL SALDO </th>
+                <td mat-cell *matCellDef="let element"> {{element.TOTALSALDO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="NUM_EXPEDIENTE">
+                <th mat-header-cell *matHeaderCellDef> NUM EXPEDIENTE</th>
+                <td mat-cell *matCellDef="let element"> {{element.NUM_EXPEDIENTE}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="SALDOCAPITAL">
+                <th mat-header-cell *matHeaderCellDef> SALDO CAPITAL</th>
+                <td mat-cell *matCellDef="let element"> {{element.SALDOCAPITAL}} </td>
+              </ng-container>
+              <ng-container matColumnDef="STATUSMORA">
+                <th mat-header-cell *matHeaderCellDef> MORA</th>
+                <td mat-cell *matCellDef="let element"> {{element.STATUSMORA}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+              <tr mat-row [ngClass]="{'make-gold': row.SHOW }" *matRowDef="let row; columns: displayedColumns;"
+                class="example-element-row"></tr>
+            </table>
+  
+  
+          </div>
+          <div>
+            <mat-paginator 
+            [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = getServerData($event)" showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

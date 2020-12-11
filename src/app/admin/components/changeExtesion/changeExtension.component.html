@@ -1,0 +1,36 @@
+<div class="div_principal">
+        <mat-card class="example-card">
+          <mat-card-header>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="example-container">
+              <form [formGroup]="formChange">
+                <div class="container justify-content-center">
+                  <div class="row">
+                    <div class="col-10">
+                      <mat-form-field class="col-12">
+                        <input formControlName="extensionAnterior" matInput placeholder="EXTENSION ANTERIOR">
+                      </mat-form-field>
+                    </div>
+                    <div class="col-10">
+                        <mat-form-field class="col-12">
+                          <input formControlName="extensionNueva" matInput placeholder="EXTENSION NUEVA">
+                        </mat-form-field>
+                      </div>
+                    <div class="col-10">
+                      <mat-form-field class="col-12">
+                        <input formControlName="password" matInput type="password" placeholder="CONTRASEÑA">
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="login_button">
+              <button  (click)="verifyExtension()" mat-raised-button color="primary">Guardar</button>
+              <button   [routerLink]="'/admin/inicio'" mat-raised-button color="warn">Cancelar</button>
+
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>

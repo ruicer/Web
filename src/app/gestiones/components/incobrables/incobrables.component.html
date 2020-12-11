@@ -1,0 +1,125 @@
+<div>
+
+    <div>
+        <div class="col-xl-12">
+            <br>
+            <h2>Creditos incobrables</h2>
+            <div>
+            </div>
+            <mat-card class="example-card">
+                <div class="container">
+                    <div class="row">
+                       
+                        <div class="col-12">
+                         <div class="col-4">
+                             <form [formGroup]="callCenterForm">
+                                <mat-form-field >
+                                    <mat-label>SUCURSALES</mat-label>
+                                    <mat-select formControlName="sucursal">
+                                      <mat-option *ngFor="let food of sucursales" [value]="food.CODIGO">
+                                        {{food.SUCURSAL}}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                             </form>
+                           
+                         </div>
+                            <mat-form-field class="col-3">
+                                <input matInput (keyup)="applyFilterOne($event.target.value)" placeholder="Filtrado">
+                              </mat-form-field>
+                              
+                            </div>
+ 
+                    </div>
+                </div>
+
+                
+                            <div class="example-container mat-elevation-z8">
+                               
+                                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                            
+                                    <ng-container matColumnDef="icons">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            OPCION </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button matTooltip="MARCAR INCOBRABLE"
+                                                matTooltipClass="example-tooltip-blue" mat-icon-button
+                                                color="primary" (click)="deletePermiso(element)">
+                                                <mat-icon>error
+
+                                                </mat-icon>
+                                            </button> </td>
+                                    </ng-container>
+                            
+                                    <ng-container matColumnDef="ID_CREDITO">
+                            
+                                        <th mat-header-cell *matHeaderCellDef> CREDITO </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.ID_CREDITO}} </td>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="PROGRAMAD">
+                                        <th mat-header-cell *matHeaderCellDef>PROGRAMA</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.PROGRAMAD}} </td>
+                                    </ng-container>
+                                    
+                                    <ng-container matColumnDef="NOMBRE">
+                                        <th mat-header-cell *matHeaderCellDef>NOMBRE</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.NOMBRE}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="DIASMORA">
+                                        <th mat-header-cell *matHeaderCellDef> DIAS MORA</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.DIASMORA}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="TIPO_ABONO">
+                                        <th mat-header-cell *matHeaderCellDef>NOMBRE</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.TIPO_ABONO}} </td>
+                                    </ng-container>
+                            
+                                    <ng-container matColumnDef="FECHA_ENTREGA">
+                                        <th mat-header-cell *matHeaderCellDef>FEC ENTREGA</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.FECHA_ENTREGA}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="FECHA_VENCIMIENTO">
+                                        <th mat-header-cell *matHeaderCellDef>FEC VENCIMIENTO</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.FECHA_VENCIMIENTO}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="CAPITAL_OTORGADO">
+                                        <th mat-header-cell *matHeaderCellDef>CAPITAL OTORGADO</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.CAPITAL_OTORGADO}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="SALDO_CAPITAL">
+                                        <th mat-header-cell *matHeaderCellDef>SALDO CAPITAL</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.SALDO_CAPITAL}} </td>
+                                    </ng-container>
+                              
+                               
+                                    <ng-container matColumnDef="SALDO_INTERES">
+                                        <th mat-header-cell *matHeaderCellDef>SALDO INTERES</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.SALDO_INTERES}} </td>
+                                    </ng-container>
+
+                                    
+                              
+                               
+                                    <ng-container matColumnDef="GRANTOTAL">
+                                        <th mat-header-cell *matHeaderCellDef>TOTAL</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.GRANTOTAL}} </td>
+                                    </ng-container>
+                                  
+                                
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        class="example-element-row"></tr>
+                            
+                                </table>
+                                <div>
+                                    <mat-paginator  #paginator1 [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                        showFirstLastButtons></mat-paginator>
+                                </div>
+                            
+                        </div>
+            </mat-card>
+
+        </div>
+    </div>
+</div>

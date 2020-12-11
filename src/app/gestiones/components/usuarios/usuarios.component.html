@@ -1,0 +1,91 @@
+<div>
+
+    <div>
+        <div class="col-xl-12">
+            <br>
+            <h2>Usuarios del sistema</h2>
+            <div>
+            </div>
+            <mat-card class="example-card">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-9">
+                                <button mat-fab  matTooltip="Agregar nuevo usuario"  (click)="add()"color="primary" matTooltipClass="example-tooltip-blue">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                            <div class="col-9">
+                                <mat-form-field>
+                                    <input matInput matTooltip="Ingrese el nombre de usuario" (keyup)="applyFilterTwo($event.target.value)" placeholder="Nombre de usuario">
+                                </mat-form-field>
+                                <button mat-button  matTooltip="Presione para buscar por nombre de usuario"  (click)="search()"color="primary" matTooltipClass="example-tooltip-blue">
+                                    <mat-icon>search</mat-icon>
+                                </button>
+                            </div>
+
+                            <div class="example-container mat-elevation-z8">
+
+                                <table mat-table [dataSource]="dataSource">
+
+                                    <ng-container matColumnDef="icons">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Opciones </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button matTooltip="ELIMINAR " matTooltipClass="example-tooltip-blue"
+                                                mat-icon-button color="primary" (click)="deletePermiso(element)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button> 
+                                            <button matTooltip="EDITAR " matTooltipClass="example-tooltip-blue"
+                                                mat-icon-button color="primary" (click)="updateUsuario(element)">
+                                                <mat-icon>update</mat-icon>
+                                            </button> 
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ID_PROCURADOR">
+
+                                        <th mat-header-cell *matHeaderCellDef> CODEMP </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.ID_PROCURADOR}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ID">
+                                        <th mat-header-cell *matHeaderCellDef>ID</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="NOMBRE">
+                                        <th mat-header-cell *matHeaderCellDef> NOMBRE </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.NOMBRE}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="USUARIO">
+                                        <th mat-header-cell *matHeaderCellDef> USUARIO</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.USUARIO}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="PUESTO">
+                                        <th mat-header-cell *matHeaderCellDef> PUESTO</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.PUESTO}} </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        class="example-element-row"></tr>
+
+                                </table>
+                                <div>
+                                    <mat-paginator #paginator1  [length]="length"
+                                    [pageSize]="pageSize"
+                                    [pageSizeOptions]="pageSizeOptions"
+                                    (page)="pageEvent = getServerData($event)" 
+                                        showFirstLastButtons></mat-paginator>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-card>
+
+        </div>
+    </div>
+</div>

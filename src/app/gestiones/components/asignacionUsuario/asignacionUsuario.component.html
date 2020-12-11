@@ -1,0 +1,154 @@
+<div>
+
+    <div>
+        <div class="col-xl-12">
+            <br>
+            <h2>Asignación de Permisos de usuario</h2>
+            <div>
+            </div>
+            <form [formGroup]="callCenterForm">
+
+                <mat-card class="example-card">
+                    <mat-card-header>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div class="container">
+                            <div class="row ">
+                                <div class="col-7">
+                                    <mat-form-field class="col-12">
+                                        <mat-label>PUESTO</mat-label>
+                                        <mat-select formControlName="PUESTOS">
+                                            <mat-option *ngFor="let food of options" [value]="food.PUESTO">
+                                                {{food.PUESTO}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+
+
+                                </div>
+                            
+
+                                <div style="padding-top: 0.30em !important" class="col-2">
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+                <br>
+
+                <mat-card class="example-card">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Opciones Asignadas</p>
+
+                                <mat-form-field>
+                                    <input matInput (keyup)="applyFilterOne($event.target.value)" placeholder="Filtrado">
+                                  </mat-form-field>
+                                <div class="example-container mat-elevation-z8">
+                                   
+                                    <table mat-table [dataSource]="dataSource2">
+                                
+                                        <ng-container matColumnDef="icons">
+                                            <th mat-header-cell *matHeaderCellDef>
+                                                Opciones </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button matTooltip="ELIMINAR ASIGNACION"
+                                                    matTooltipClass="example-tooltip-blue" mat-icon-button
+                                                    color="primary" (click)="deletePermiso(element)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </button> </td>
+                                        </ng-container>
+                                
+                                        <ng-container matColumnDef="ID">
+                                
+                                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+                                        </ng-container>
+                              
+                                
+                                        <ng-container matColumnDef="TITLE">
+                                            <th mat-header-cell *matHeaderCellDef> GRUPO </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.TITLE}} </td>
+                                        </ng-container>
+
+                                        
+                                        <ng-container matColumnDef="URL">
+                                            <th mat-header-cell *matHeaderCellDef> URL </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.URL}} </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                            class="example-element-row"></tr>
+                                
+                                    </table>
+                                    <div>
+                                        <mat-paginator  #paginator1 [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                            showFirstLastButtons></mat-paginator>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <p>Opciones no  asignadas</p>
+
+                                <mat-form-field>
+                                    <input matInput (keyup)="applyFilterTwo($event.target.value)" placeholder="Filtrado">
+                                  </mat-form-field>
+                                <div class="example-container mat-elevation-z8">
+                                    <table mat-table [dataSource]="dataSource">
+
+                                        <ng-container matColumnDef="icons">
+                                            <th mat-header-cell *matHeaderCellDef>
+                                                Opciones </th>
+                                            <td mat-cell *matCellDef="let element">
+                                                <button matTooltip="ASIGNAR"
+                                                    matTooltipClass="example-tooltip-blue" mat-icon-button
+                                                    color="primary" (click)="addPermiso(element)">
+                                                    <mat-icon>add</mat-icon>
+                                                </button> </td>
+                                        </ng-container>
+
+                                       
+                                        <ng-container matColumnDef="ID">
+                                
+                                            <th mat-header-cell *matHeaderCellDef> ID </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.ID}} </td>
+                                        </ng-container>
+                                
+                               
+                                
+                                        <ng-container matColumnDef="TITLE">
+                                            <th mat-header-cell *matHeaderCellDef> GRUPO </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.TITLE}} </td>
+                                        </ng-container>
+
+                                        
+                                        <ng-container matColumnDef="URL">
+                                            <th mat-header-cell *matHeaderCellDef> URL </th>
+                                            <td mat-cell *matCellDef="let element"> {{element.URL}} </td>
+                                        </ng-container>
+                                        <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                            class="example-element-row"></tr>
+
+                                    </table>
+                                    <div>
+                                        <mat-paginator #paginator2 [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                            showFirstLastButtons></mat-paginator>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-card>
+            </form>
+
+        </div>
+    </div>
+</div>

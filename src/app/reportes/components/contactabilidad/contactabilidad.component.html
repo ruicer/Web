@@ -1,0 +1,120 @@
+<div>
+
+    <div>
+      <div class="col-xl-12">
+        <br>
+        <h2>Call Center</h2>
+        <h5 *ngIf="mostrarTotal">Total de gestiones : {{totalGes}} </h5>
+
+        <div>
+      
+        </div>
+        <mat-card class="example-card">
+
+          <mat-card-header>
+            <mat-card-title>Reporte Gestiones</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="callCenterForm">
+              <div class="container">
+                <div class="row ">
+                  <!---<button  mat-raised-button color="primary" (click)="export()">Exportar a Excel</button>
+!--->
+                  
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input matInput  formControlName="fechIn" [matDatepicker]="picker" placeholder="FECHA">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                 
+
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+  
+        </mat-card>
+        <br>
+  
+        <mat-card class="example-card">
+          <button *ngIf="showExport" mat-raised-button color="primary" (click)="exportAsExcel()">Exportar a Excel</button>
+              
+          <div class="container">
+            <div class="row">
+           
+            <br>
+            </div>
+          </div>
+          <div class="example-container mat-elevation-z8">
+            <table mat-table #table [dataSource]="dataSource">
+
+              <ng-container matColumnDef="REG">
+             
+                <th mat-header-cell *matHeaderCellDef>REGION </th>
+                <td mat-cell *matCellDef="let element"> {{element.REG}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="SUC">
+                <th mat-header-cell *matHeaderCellDef> SUCURSAL </th>
+                <td mat-cell *matCellDef="let element"> {{element.SUC}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="RANGOMORA">
+                <th mat-header-cell *matHeaderCellDef> MORA </th>
+                <td mat-cell *matCellDef="let element"> {{element.RANGOMORA}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="TOTCRED">
+                <th mat-header-cell *matHeaderCellDef> TOTAL  </th>
+                <td mat-cell *matCellDef="let element"> {{element.TOTCRED}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="TOTLLAMADA">
+                <th mat-header-cell *matHeaderCellDef>TOTAL LLAM. </th>
+                <td mat-cell *matCellDef="let element"> {{element.TOTLLAMADA}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="CLIUNOMASLLAMA">
+                <th mat-header-cell *matHeaderCellDef> CLI </th>
+                <td mat-cell *matCellDef="let element"> {{element.CLIUNOMASLLAMA}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="POCLIECONTOT">
+                <th mat-header-cell *matHeaderCellDef> POCLIECONTOT </th>
+                <td mat-cell *matCellDef="let element"> {{element.POCLIECONTOT}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="CLIENCONTAC">
+                <th mat-header-cell *matHeaderCellDef> CLI. CONTACTADO </th>
+                <td mat-cell *matCellDef="let element"> {{element.CLIENCONTAC}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="ACUPAGO">
+                <th mat-header-cell *matHeaderCellDef> ACU PAGO</th>
+                <td mat-cell *matCellDef="let element"> {{element.ACUPAGO}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="MONTO">
+                <th mat-header-cell *matHeaderCellDef> MONTO</th>
+                <td mat-cell *matCellDef="let element"> {{element.MONTO}} </td>
+              </ng-container>
+              <ng-container matColumnDef="NOCONTACT">
+                <th mat-header-cell *matHeaderCellDef> CONTACTO</th>
+                <td mat-cell *matCellDef="let element"> {{element.NOCONTACT}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+              <tr mat-row [ngClass]="{'make-gold': row.SHOW }" *matRowDef="let row; columns: displayedColumns;"
+                class="example-element-row"></tr>
+            </table>
+  
+  
+          </div>
+          <div>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,122 @@
+<div>
+
+    <div>
+      <div class="col-xl-12">
+        <br>
+        <h2>Call Center</h2>
+        <h5 *ngIf="mostrarTotal">Total de gestiones : {{totalGes}} </h5>
+
+        <div>
+      
+        </div>
+        <mat-card class="example-card">
+
+          <mat-card-header>
+            <mat-card-title>Reporte Gestiones </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <form [formGroup]="callCenterForm">
+              <div class="container">
+                <div class="row ">
+               
+                  
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input matInput  formControlName="fechIn" [matDatepicker]="picker" placeholder="FECHA INICIAL">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-4">
+                    <mat-form-field>
+                      <input matInput  formControlName="fechFn" [matDatepicker]="picker1" placeholder="FECHA FINAL">
+                      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      <mat-datepicker #picker1></mat-datepicker>
+                    </mat-form-field>
+                  </div>
+               
+
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+  
+        </mat-card>
+        <br>
+  
+        <mat-card class="example-card">
+          <button *ngIf="showExport" mat-raised-button color="primary" (click)="export()">Exportar a Excel</button>
+              
+          <div class="container">
+            <div class="row">
+           
+            <br>
+            </div>
+          </div>
+          <div class="example-container mat-elevation-z8">
+            <table mat-table #table [dataSource]="dataSource">
+
+              <ng-container matColumnDef="REGION">
+             
+                <th mat-header-cell *matHeaderCellDef>REGION </th>
+                <td mat-cell *matCellDef="let element"> {{element.REGION}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="AGENCIA">
+                <th mat-header-cell *matHeaderCellDef> AGENCIA </th>
+                <td mat-cell *matCellDef="let element"> {{element.AGENCIA}} </td>
+              </ng-container>
+      
+              <ng-container matColumnDef="CREDITO">
+                <th mat-header-cell *matHeaderCellDef> CREDITO </th>
+                <td mat-cell *matCellDef="let element"> {{element.CREDITO}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="NOMBRECLIENTE">
+                <th mat-header-cell *matHeaderCellDef>NOMBRE </th>
+                <td mat-cell *matCellDef="let element"> {{element.NOMBRECLIENTE}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="PROGRAMA">
+                <th mat-header-cell *matHeaderCellDef> PROGRAMA </th>
+                <td mat-cell *matCellDef="let element"> {{element.PROGRAMA}} </td>
+              </ng-container>
+            
+          
+            
+              <ng-container matColumnDef="NOMBREPROMOTOR">
+                <th mat-header-cell *matHeaderCellDef> PROMOTOR </th>
+                <td mat-cell *matCellDef="let element"> {{element.NOMBREPROMOTOR}} </td>
+              </ng-container>
+            
+              <ng-container matColumnDef="DIASMORA">
+                <th mat-header-cell *matHeaderCellDef> MORA</th>
+                <td mat-cell *matCellDef="let element"> {{element.DIASMORA}} </td>
+              </ng-container>
+              
+              <ng-container matColumnDef="FECHAGESTION">
+                <th mat-header-cell *matHeaderCellDef> FECHA</th>
+                <td mat-cell *matCellDef="let element"> {{element.FECHAGESTION}} </td>
+              </ng-container>
+              <ng-container matColumnDef="USUARIOGESTION">
+                <th mat-header-cell *matHeaderCellDef> US</th>
+                <td mat-cell *matCellDef="let element"> {{element.USUARIOGESTION}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+              <tr mat-row [ngClass]="{'make-gold': row.SHOW }" *matRowDef="let row; columns: displayedColumns;"
+                class="example-element-row"></tr>
+            </table>
+  
+  
+          </div>
+          <div>
+            <mat-paginator 
+            [length]="length"
+            [pageSize]="pageSize"
+            [pageSizeOptions]="pageSizeOptions"
+            (page)="pageEvent = getServerData($event)" showFirstLastButtons></mat-paginator>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

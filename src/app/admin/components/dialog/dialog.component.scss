@@ -1,0 +1,161 @@
+.mat-tab-label  {
+    background: #00227b;
+}
+.mat-tab-label-active{
+    background: #00227b;
+}
+.mat-tab-label-content {
+    color: rgba(255, 255, 255, 0.993) !important;
+}
+
+.reg{
+  padding-right: 2px !important;
+}
+table {
+  background-color: #e0e0e0;
+    width: 100%;
+    max-height: 10% !important;
+}
+.table-content {
+    height: 12em;
+    width: 100%;
+    overflow: auto;
+}
+
+.table-plan{
+    width: 30%;
+    height: 25% !important;
+    overflow: auto;
+}
+
+.example-small-box, .example-large-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //margin: 16px;
+  //padding: 16px;
+  border-radius: 8px;
+  }
+  .example-large-box {
+    height: 175px;
+    width:  41em;
+  }
+.tab-plan {
+  max-height: 175px !important;
+  height: 173px !important;
+  width: 25em;
+  overflow: auto;
+}
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 15px;
+  }
+  .mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 15px;
+  }
+  .mat-table-sticky:first-child {
+    border-right: 1px solid #e0e0e0;
+  }
+  
+  .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+  }
+  
+  .mat-cell {
+    padding: 5em;
+  }
+  
+  .mat-header-cell {
+    padding: 12em;
+    padding-right: 2em !important;
+    background: #3949ab !important;
+    color: white !important;
+  }
+  
+  th {
+    color: rgba(255, 255, 255, 0.993);
+  }
+  tr.example-detail-row {
+    height: 0;
+  }
+  table tr {
+    background-color: #e0e0e0;
+    padding-left: 2em;
+  }
+  
+  tr.example-detail-row {
+    height: 0;
+  }
+
+  .mat-row:nth-child(even){
+    background-color:rgba(209, 215, 230, 0.692)
+  }
+  
+  .mat-row:nth-child(odd){
+    background-color:rgb(255, 255, 255)
+  }
+
+
+  .example-tooltip-blue {
+    background: #3949ab;
+  }
+
+  .example-tooltip-red {
+    background: #b71c1c;
+  }
+
+  .mat-tab-body-content{
+    height: 150px !important;
+  }
+
+.content_client {
+  height: 200px !important;
+}
+mat-dialog-content{
+  max-height: 100% !important;
+}
+
+td.mat-column-star {
+  width: 30px;
+  padding-right: 8px;
+}
+
+.example-container {
+  border-radius: 8px;
+  overflow: auto;
+}
+.mat-calendar-table-header th{
+  color:  #3949ab !important
+}
+
+.mat-cell {
+  padding-right: 0.8em !important;
+  font-size: 11px !important;
+  align-content: center !important;
+}
+
+.mat-header-cell {
+  padding-left: 0.6em !important;
+
+}
+
+.example-small-box2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -10px;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.example-small-box2 {
+  height: 50px;
+  width: 90px;
+}

@@ -1,0 +1,76 @@
+<div>
+
+    <div>
+        <div class="col-xl-12">
+            <br>
+            <h2>Nomenglaturas de gestiones</h2>
+            <div>
+            </div>
+            <mat-card class="example-card">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-9">
+                                <button mat-fab  matTooltip="Agregar nueva"  (click)="add()"color="primary" matTooltipClass="example-tooltip-blue">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                            </div>
+                            <div class="col-9">
+                                <mat-form-field>
+                                    <input matInput (keyup)="applyFilterTwo($event.target.value)" placeholder="Filtrado">
+                                </mat-form-field>
+                            </div>
+
+                            <div class="example-container mat-elevation-z8">
+
+                                <table mat-table [dataSource]="dataSource">
+
+                                    <ng-container matColumnDef="icons">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            Opciones </th>
+                                        <td mat-cell *matCellDef="let element">
+                                            <button matTooltip="ELIMINAR " matTooltipClass="example-tooltip-blue"
+                                                mat-icon-button color="primary" (click)="deletePermiso(element)">
+                                                <mat-icon>delete</mat-icon>
+                                            </button> </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ID_GESTION">
+
+                                        <th mat-header-cell *matHeaderCellDef> GESTION </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.ID_GESTION}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="GESTION">
+                                        <th mat-header-cell *matHeaderCellDef>NOMBRE</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.GESTION}} </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="TIPO">
+                                        <th mat-header-cell *matHeaderCellDef> TIPO </th>
+                                        <td mat-cell *matCellDef="let element"> {{element.TIPO}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="TIPOGESTION">
+                                        <th mat-header-cell *matHeaderCellDef> NOMBRE DE TIPO</th>
+                                        <td mat-cell *matCellDef="let element"> {{element.TIPOGESTION}} </td>
+                                    </ng-container>
+                                    <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+                                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                        class="example-element-row"></tr>
+
+                                </table>
+                                <div>
+                                    <mat-paginator #paginator1 [pageSize]="5" [pageSizeOptions]="[5, 10, 20]"
+                                        showFirstLastButtons></mat-paginator>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </mat-card>
+
+        </div>
+    </div>
+</div>
